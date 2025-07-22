@@ -1,0 +1,11 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      TELEGRAM_BOT_TOKEN: "7048137180:AAHgu-D6HLyoGgqJ6TYvwG9njLYJl1kBpb0"
+      CHANNEL_LINK: "https://t.me/+cy-4Uax9J882ZTE1"
+    volumes:
+      - .:/var/www/html

@@ -1,0 +1,23 @@
+FROM php:8.1-cli
+
+# Install required PHP extensions
+RUN apt-get update && apt-get install -y \
+    git unzip curl && \
+    docker-php-ext-install sockets
+
+# Set working directory
+WORKDIR /app
+
+# Copy and install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copy app code
+COPY . .
+
+# Install PHP dependencies
+RUN composer install
+
+# Make users.json writable
+RUN chmod 666 users.json
+
+CMD [ "php", "index.php" ]
